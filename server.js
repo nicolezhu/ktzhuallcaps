@@ -20,7 +20,7 @@ function capitalize(s) {
 // katie: 128738898
 // nicole: 810339430313631744, 242308086
 
-var stream = T.stream('statuses/filter', { follow: '128738898' });
+var stream = T.stream('statuses/filter', { follow: '242308086' });
 
 stream.on('tweet', function (tweet) {
   var latestTweet = tweet.text;
