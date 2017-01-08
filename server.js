@@ -20,20 +20,19 @@ function capitalize(s) {
 // nicole: 810339430313631744, 242308086
 
 var stream = T.stream('statuses/filter', { follow: '128738898' });
-console.log(stream);
 stream.on('tweet', function (tweet) {
-  console.log('THIS IS A TWEET', tweet.text);
-  var latestTweet = tweet.text;
-  // strip out @mentions so as not to annoy people
-  latestTweet = latestTweet.replace(/\B@[a-z0-9_-]+/gi, '');
-  // strip out links to articles?
-  var capitalizedTweet = capitalize(latestTweet);
-  console.log(capitalizedTweet);
-  T.post('statuses/update', { status: capitalizedTweet }, function(err, data, response) {
-    if (err) {
-      console.log(err);
-    }
-  });
+  if (tweet.user.screen_name === 'ktzhu') {
+    console.log('THIS IS A TWEET', tweet.text);
+    var latestTweet = tweet.text;
+    // strip out @ so as not to annoy people
+    latestTweet = latestTweet.replace(/\B@+/gi, '');
+    var capitalizedTweet = capitalize(latestTweet);
+    T.post('statuses/update', { status: capitalizedTweet }, function(err, data, response) {
+      if (err) {
+        console.log(err);
+      }
+    });
+  }
 });
 
 /**********************************************************************************************/
